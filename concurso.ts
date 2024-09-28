@@ -24,37 +24,75 @@ la función calcularPuntaje para determinar la torta con el mayor puntaje.
 import * as rs from "readline-sync" 
 
 
-//  variables
+//  variables Globales
 
-const CONCURSANTES = 5;
-let i: number = 0;
-let presentacion:number = 0; 
+let CantidadConsursantes: number =0;
+let presentacion: number = 0; 
 let sabor: number = 0;
-let dificultad:number = 0; 
-let PuntajeMax =  0;
-let Ganador =  0;
+let dificultad: number = 0; 
+let mayorPuntje: number = 0;
+let Ganador: number = 0;
 let Empate: boolean =false;
 
-// Bucle para obtener las puntuaciones de cada participante
+function determinarGanador():void{
+  CantidadConsursantes = rs.questionInt(`Cuantas tortas del concurso?`);
+//BUCLE FOR
+for (let i = 1; i <= CantidadConsursantes; i++) {
+    console.log(` CONCURSANTE NUMERO : ${i}`)
 
-for (let i = 0; i < CONCURSANTES; i++) {
-    console.log(`\n CONCURSANTE : ${i+1}`)
+
+ //ASIGNACION DE PUNTAJES 
+
+sabor = obtenerPuntaje("Sabor ");
+presentacion = obtenerPuntaje("Presentacion");
+dificultad = obtenerPuntaje("Dificultad ");
+const puntajeTotal = calcularPuntaje(sabor, presentacion, dificultad)
+console.log(`
+  El puntaje totalde la torta ${i} es: ${puntajeTotal}`);
+
+//COMPROBACIONES 
+
+if( puntajeTotal > mayorPuntje){
+  mayorPuntje = puntajeTotal;
+  Ganador = i
+  Empate = false
+  
+}  else if(puntajeTotal === mayorPuntje) {
+    Empate = true;
+  }
+  
 }
-do { 
-sabor = rs.questionInt("Ingrese su Puntuacion del 1 al 5:")
-      if (sabor
-        console.log("Ingrese un Puntaje")
-   }   
-      } while (sabor <1 || sabor >5);
 
-      do {
-         dificultad = rs.questionInt("Ingrese el puntaje de dificultad del 1 al 5:")
-        if (dificultad < 1 || dificultad > 5) {
-          console.log("El puntaje debe estar entre 1 y 5");
-        }
-      }
+if(Empate){
+  console.log(`
+    Hay un empate, se necesita comer mas tortas para determinar el ganador
+    `);
+    } else {
+      console.log(`
+        La torta ganadora es ${Ganador} con un puntaje de ${mayorPuntje}`);
+    }
 
-    // Calcular el puntaje total
-    
+}
 
-    console.log(""):
+
+// Calcular puntaje, pregunta al usuario puntaje de S, P, D:
+
+function obtenerPuntaje(criterio: string): number{ 
+         const opciones  = [ '1' , '2' , '3' , '4' , '5' ]     
+  const index = rs.keyInSelect( opciones ,  `Introduce el puntaje de ${criterio}` );  
+  return Number (opciones [index]);    //Number convierte el string a number (N)
+ }
+
+
+//Funcion que calcula el Puntaje de S, P y D:
+function calcularPuntaje(s: number, p: number, d: number ): number {
+return s + d + d;
+}
+
+determinarGanador();
+
+
+
+
+
+  
