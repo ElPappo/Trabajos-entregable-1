@@ -91,6 +91,9 @@ return s + d + d;
 
 determinarGanador();
 
+/*Logre completarlo siguiendolo a marcelo, si tengo que plantearlo desde 0 solo,  no creo
+terminarlo por ahora, hasta que no incorpore cada uno de lo elementos para poder implementar
+en las logicas de los ejercicio*/
 
 
 
